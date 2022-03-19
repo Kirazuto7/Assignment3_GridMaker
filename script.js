@@ -4,12 +4,23 @@ let colorSelected;
 
 // Add a row
 function addR() {
-    alert("Clicked Add Row"); // Replace this line with your code.
+    let gridTableRef = document.getElementById("grid"); //reference to the table
+    let newRow = gridTableRef.insertRow(-1); //Insert a row at the end of the table
+    let newCell = newRow.insertCell(0); //Insert a cell in the row at the index 0
+    numRows ++;
+
+    if(numRows == 1) numCols++; // when adding a row for the first time, a column is also being added
 }
 
 // Add a column
 function addC() {
-    alert("Clicked Add Col"); // Replace this line with your code.
+    let allRows = document.querySelectorAll("tr");
+
+    for(let i = 0; i < numRows; i++)
+    {
+        let newColumn = allRows[i].insertCell(0);
+    }
+    numCols++;
 }
 
 // Remove a row
