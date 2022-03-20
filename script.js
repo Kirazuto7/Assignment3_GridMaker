@@ -91,7 +91,7 @@ function fillAll(){
 
 // Clear all cells
 function clearAll(){
-    //if no rows exit it displays a message
+    //if no rows exist it displays a message
     if(numRows === 0)
     {
         alert("There are no Cells to clear")
