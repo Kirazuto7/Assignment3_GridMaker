@@ -4,6 +4,8 @@ let colorSelected;
 
 // Add a row
 function addR() {
+    console.log("current row count:");
+    console.log(numRows);
     let gridTableRef = document.getElementById("grid"); //reference to the table
     let newRow = gridTableRef.insertRow(-1); //Insert a row at the end of the table
     let newCell = newRow.insertCell(0); //Insert a cell in the row at the index 0
@@ -18,10 +20,14 @@ function addR() {
             let newColumn = newRow.insertCell(-1);
         }
     }
+    console.log("new row count:");
+    console.log(numRows);
 }
 
 // Add a column
 function addC() {
+    console.log("current col count:");
+    console.log(numCols);
     let allRows = document.querySelectorAll("tr");
 
     for(let i = 0; i < numRows; i++)
@@ -29,10 +35,15 @@ function addC() {
         let newColumn = allRows[i].insertCell(0);
     }
     numCols++;
+    
+    console.log("new col count:");
+    console.log(numCols);
 }
 
 // Remove a row
 function removeR() {
+    console.log("current row count:");
+    console.log(numRows);
     if(numRows === 0){
         alert("Please add a row"); //send alert when there are no rows to delete
     }
@@ -44,10 +55,14 @@ function removeR() {
             numCols = 0;
         }
     }
+    console.log("new row count:");
+    console.log(numRows);
 }
 
 // Remove a column
 function removeC() {
+    console.log("current col count:");
+    console.log(numCols);
     if(numCols === 0){
         alert("Please add a column"); //send alert when there are no columns to delete
     }
@@ -57,7 +72,12 @@ function removeC() {
             allRows[i].deleteCell(-1); //delete the last cell of each row
         }
         numCols --; //decrement column count
+        if(numCols === 0){ //if you just deleted the last column, reset the row count to 0
+            numRows = 0;
+        }
     }
+    console.log("new col count:");
+    console.log(numCols);
 }
 
 // Sets global variable for selected color
