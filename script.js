@@ -9,7 +9,7 @@ function addR() {
 
 // Add a column
 function addC() {
-    alert("Clicked Add Col"); // Replace this line with your code.
+    alert("Clicked Add Column"); // Replace this line with your code.
 }
 
 // Remove a row
@@ -28,6 +28,19 @@ function selectColor(){
     console.log(colorSelected);
 }
 
+// Fills a cell with a color when you click on a certain cell of the grid
+function fillCell() {
+
+    let cells = document.querySelectorAll("td");
+    
+    for (let i = 0; i < cells.length; i++)
+    {
+        cells[i].onclick = function() {
+            this.style.backgroundColor = colorSelected;
+        }
+    }
+}
+
 // Fill all uncolored cells
 function fillU(){
     alert("Clicked Fill All Uncolored"); // Replace this line with your code.
@@ -40,5 +53,14 @@ function fillAll(){
 
 // Clear all cells
 function clearAll(){
-    alert("Clicked Clear All"); // Replace this line with your code.
+    //reset numRows and numCols
+    numRows = 0;
+    numCols = 0;
+
+    let grid = document.getElementById("grid");
+
+    while(grid.lastElementChild != null)
+    {
+        grid.removeChild(grid.lastElementChild);
+    }
 }
