@@ -4,22 +4,60 @@ let colorSelected;
 
 // Add a row
 function addR() {
-    alert("Clicked Add Row"); // Replace this line with your code.
+    let gridTableRef = document.getElementById("grid"); //reference to the table
+    let newRow = gridTableRef.insertRow(-1); //Insert a row at the end of the table
+    let newCell = newRow.insertCell(0); //Insert a cell in the row at the index 0
+    numRows ++;
+
+    if(numRows == 1) numCols++; // when adding a row for the first time, a column is also being added
+
+    if(numCols > 1)
+    {
+        for(let i = 0; i < numCols - 1; i++)
+        {
+            let newColumn = newRow.insertCell(-1);
+        }
+    }
 }
 
 // Add a column
 function addC() {
-    alert("Clicked Add Column"); // Replace this line with your code.
+    let allRows = document.querySelectorAll("tr");
+
+    for(let i = 0; i < numRows; i++)
+    {
+        let newColumn = allRows[i].insertCell(0);
+    }
+    numCols++;
 }
 
 // Remove a row
 function removeR() {
-    alert("Clicked Remove Row"); // Replace this line with your code.
+    if(numRows === 0){
+        alert("Please add a row"); //send alert when there are no rows to delete
+    }
+    else{
+        let gridTableRef = document.getElementById("grid"); //reference table
+        gridTableRef.deleteRow(-1); //delete a row from the end of the table
+        numRows --; //decrement row count
+        if(numRows === 0){ //if you just deleted the last row, reset the column count to 0
+            numCols = 0;
+        }
+    }
 }
 
 // Remove a column
 function removeC() {
-    alert("Clicked Remove Col"); // Replace this line with your code.
+    if(numCols === 0){
+        alert("Please add a column"); //send alert when there are no columns to delete
+    }
+    else{
+        let allRows = document.querySelectorAll("tr"); //reference the rows of the table
+        for(let i = 0; i < numRows; i++){
+            allRows[i].deleteCell(-1); //delete the last cell of each row
+        }
+        numCols --; //decrement column count
+    }
 }
 
 // Sets global variable for selected color
