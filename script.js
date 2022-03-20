@@ -68,68 +68,43 @@ function selectColor(){
 
 // Fill all uncolored cells
 function fillU(){
-    //if no rows exit
+    //if no rows send alert
     if (numRows === 0)
     {
-        return
+        alert("There are no cells to color");
     }
-    //get array of all rows
-    let row = document.querySelectorAll("tr");
-    for (let i = 0; i < numRows; i++)
+    //get array of all cells
+    let cells = document.querySelectorAll("td");
+    for(let i = 0; i < cells.length; i++)
     {
-        //get array of all cols at each row
-        let col = row[i].children;
-        for(let j = 0; j < numCols;j++)
+        //get the color of current cell
+        let cellColor = window.getComputedStyle(cells[i]).backgroundColor;
+        //if cell color is white change to selected color
+        if (cellColor == "rgb(255, 255, 255)")
         {
-            //get the color of current cell
-            let cellColor = window.getComputedStyle(col[j]).backgroundColor;
-            //if cell color is white change to selected color
-            if (cellColor == "rgb(255, 255, 255)")
-            {
-                col[j].style.backgroundColor = colorSelected;
-            }
-        } 
-    }
+            cells[i].style.backgroundColor = colorSelected;
+        }
+    } 
+    
 }
 
 // Fill all cells
 function fillAll(){
-    //if no rows exit
+    //if no rows send alert
     if (numRows === 0)
     {
-        return
+        alert("There are no cells to color");
     }
-    //get array of all rows
-    let row = document.querySelectorAll("tr");
-    for (let i = 0; i < numRows; i++)
-    {
-        //get array of all cols at each row
-        let col = row[i].children;
-        for(let j = 0; j < numCols;j++)
-        {
-            //change each cell color to selected color
-            col[j].style.backgroundColor = colorSelected;
-        } 
-    }
+    //get array of all cells
+    let cells = document.querySelectorAll("td");
+    for(let i = 0; i < cells.length; i++)
+    {   
+        //change color to selected
+        cells[i].style.backgroundColor = colorSelected;
+    } 
 }
 
 // Clear all cells
 function clearAll(){
-    //if no rows exit
-    if (numRows === 0)
-    {
-        return
-    }
-    //get array of all rows
-    let row = document.querySelectorAll("tr");
-    for (let i = 0; i < numRows; i++)
-    {
-        //get array of all cols at each row
-        let col = row[i].children;
-        for(let j = 0; j < numCols;j++)
-        {
-            //change each cell color to white
-            col[j].style.backgroundColor = 'white';
-        } 
-    }
+    alert("Clicked Clear All"); // Replace this line with your code.
 }
