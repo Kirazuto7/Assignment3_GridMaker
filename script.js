@@ -53,14 +53,17 @@ function fillAll(){
 
 // Clear all cells
 function clearAll(){
-    //reset numRows and numCols
-    numRows = 0;
-    numCols = 0;
-
-    let grid = document.getElementById("grid");
-
-    while(grid.lastElementChild != null)
+    //if no rows exit it displays a message
+    if(numRows === 0)
     {
-        grid.removeChild(grid.lastElementChild);
+        alert("There are no Cells to clear")
+    }
+    else
+    {
+        let td = document.querySelectorAll("td");
+
+        for (let i = 0; i < td.length; i++) {
+            td[i].style.backgroundColor = "white";
+        }
     }
 }
