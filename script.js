@@ -10,6 +10,14 @@ function addR() {
     numRows ++;
 
     if(numRows == 1) numCols++; // when adding a row for the first time, a column is also being added
+
+    if(numCols > 1)
+    {
+        for(let i = 0; i < numCols - 1; i++)
+        {
+            let newColumn = newRow.insertCell(-1);
+        }
+    }
 }
 
 // Add a column
