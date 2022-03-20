@@ -40,12 +40,24 @@ function removeR() {
         let gridTableRef = document.getElementById("grid"); //reference table
         gridTableRef.deleteRow(-1); //delete a row from the end of the table
         numRows --; //decrement row count
+        if(numRows === 0){ //if you just deleted the last row, reset the column count to 0
+            numCols = 0;
+        }
     }
 }
 
 // Remove a column
 function removeC() {
-    alert("Clicked Remove Col"); // Replace this line with your code.
+    if(numCols === 0){
+        alert("Please add a column"); //send alert when there are no columns to delete
+    }
+    else{
+        let allRows = document.querySelectorAll("tr"); //reference the rows of the table
+        for(let i = 0; i < numRows; i++){
+            allRows[i].deleteCell(-1); //delete the last cell of each row
+        }
+        numCols --; //decrement column count
+    }
 }
 
 // Sets global variable for selected color
