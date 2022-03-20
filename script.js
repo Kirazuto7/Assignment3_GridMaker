@@ -33,7 +33,14 @@ function addC() {
 
 // Remove a row
 function removeR() {
-    alert("Clicked Remove Row"); // Replace this line with your code.
+    if(numRows === 0){
+        alert("Please add a row"); //send alert when there are no rows to delete
+    }
+    else{
+        let gridTableRef = document.getElementById("grid"); //reference table
+        gridTableRef.deleteRow(-1); //delete a row from the end of the table
+        numRows --; //decrement row count
+    }
 }
 
 // Remove a column
