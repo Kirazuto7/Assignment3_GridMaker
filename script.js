@@ -4,102 +4,60 @@ let colorSelected;
 
 // Add a row
 function addR() {
-    //increase the number of rows
-    numRows++;
-    //gets the element for table
-    let container = document.getElementById("grid");
-    //create row element
-    let row = document.createElement("tr");
-    //create col if there are none
-    if (numCols === 0)
+    let gridTableRef = document.getElementById("grid"); //reference to the table
+    let newRow = gridTableRef.insertRow(-1); //Insert a row at the end of the table
+    let newCell = newRow.insertCell(0); //Insert a cell in the row at the index 0
+    numRows ++;
+
+    if(numRows == 1) numCols++; // when adding a row for the first time, a column is also being added
+
+    if(numCols > 1)
     {
-        numCols++;
+        for(let i = 0; i < numCols - 1; i++)
+        {
+            let newColumn = newRow.insertCell(-1);
+        }
     }
-    //add row to grid
-    container.appendChild(row);   
-    //create columns and add to row
-    for(let j = 0; j < numCols;j++)
-    {
-        let col = document.createElement("td");
-        row.appendChild(col);
-    } 
-    console.log(numRows)
-    console.log(numCols)
-    console.log('addr')
 }
 
 // Add a column
 function addC() {
-     //increase the number of columns
-     
-     //create row if there are none
-     if (numRows === 0)
+    let allRows = document.querySelectorAll("tr");
+
+    for(let i = 0; i < numRows; i++)
     {
-        addR();
+        let newColumn = allRows[i].insertCell(0);
     }
-     else
-    {
-        //iterate through all rows and create a new col and append to each row
-        for (let i = 0; i < numRows; i++)
-        {
-            let col = document.createElement("td");
-            document.querySelectorAll("tr")[i].appendChild(col);
-        }
-        numCols++;
-    }
-    
-    console.log(numRows)
-    console.log(numCols)
-    console.log('addc')
+    numCols++;
 }
 
 // Remove a row
 function removeR() {
-    //exit if no rows
-    if (numRows === 0)
-    {
-        return
+    if(numRows === 0){
+        alert("Please add a row"); //send alert when there are no rows to delete
     }
-    //get table element
-    let container = document.getElementById("grid");
-    //remove last row
-    container.removeChild(container.lastElementChild);
-    //reduce number of rows
-    numRows--;
-    
-    if (numRows === 0)
-    {
-        numCols = 0
+    else{
+        let gridTableRef = document.getElementById("grid"); //reference table
+        gridTableRef.deleteRow(-1); //delete a row from the end of the table
+        numRows --; //decrement row count
+        if(numRows === 0){ //if you just deleted the last row, reset the column count to 0
+            numCols = 0;
+        }
     }
-    console.log(numRows)
-    console.log(numCols)
-    console.log('rr')
-
 }
 
 // Remove a column
 function removeC() {
-    //exit if no cols
-    if (numCols === 0)
-    {
-        return
+    if(numCols === 0){
+        alert("Please add a column"); //send alert when there are no columns to delete
     }
-    //get array of all rows
-    let row = document.querySelectorAll("tr");
-    for (let i = 0; i < numRows; i++)
-        {
-            //for each row remove the last col
-            row[i].removeChild(row[i].lastElementChild);
+    else{
+        let allRows = document.querySelectorAll("tr"); //reference the rows of the table
+        for(let i = 0; i < numRows; i++){
+            allRows[i].deleteCell(-1); //delete the last cell of each row
         }
-    numCols--;
-    
-    if (numCols === 0)
-    {
-        numRows = 0
+        numCols --; //decrement column count
     }
-    console.log(numRows)
-    console.log(numCols)
-    console.log('rc')
 }
 
 // Sets global variable for selected color
