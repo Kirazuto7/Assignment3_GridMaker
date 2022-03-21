@@ -66,6 +66,19 @@ function selectColor(){
     console.log(colorSelected);
 }
 
+// Fills a cell with a color when you click on a certain cell of the grid
+function fillCell() {
+
+    let cells = document.querySelectorAll("td");
+    
+    for (let i = 0; i < cells.length; i++)
+    {
+        cells[i].onclick = function() {
+            this.style.backgroundColor = colorSelected;
+        }
+    }
+}
+
 // Fill all uncolored cells
 function fillU(){
     alert("Clicked Fill All Uncolored"); // Replace this line with your code.
@@ -78,5 +91,17 @@ function fillAll(){
 
 // Clear all cells
 function clearAll(){
-    alert("Clicked Clear All"); // Replace this line with your code.
+    //if no rows exist it displays a message
+    if(numRows === 0)
+    {
+        alert("There are no Cells to clear")
+    }
+    else
+    {
+        let td = document.querySelectorAll("td");
+
+        for (let i = 0; i < td.length; i++) {
+            td[i].style.backgroundColor = "white";
+        }
+    }
 }
