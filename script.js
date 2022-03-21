@@ -81,12 +81,40 @@ function fillCell() {
 
 // Fill all uncolored cells
 function fillU(){
-    alert("Clicked Fill All Uncolored"); // Replace this line with your code.
+    //if no rows send alert
+    if (numRows === 0)
+    {
+        alert("There are no cells to color");
+    }
+    //get array of all cells
+    let cells = document.querySelectorAll("td");
+    for(let i = 0; i < cells.length; i++)
+    {
+        //get the color of current cell
+        let cellColor = window.getComputedStyle(cells[i]).backgroundColor;
+        //if cell color is white change to selected color
+        if (cellColor == "rgb(255, 255, 255)")
+        {
+            cells[i].style.backgroundColor = colorSelected;
+        }
+    } 
+    
 }
 
 // Fill all cells
 function fillAll(){
-    alert("Clicked Fill All"); // Replace this line with your code.
+    //if no rows send alert
+    if (numRows === 0)
+    {
+        alert("There are no cells to color");
+    }
+    //get array of all cells
+    let cells = document.querySelectorAll("td");
+    for(let i = 0; i < cells.length; i++)
+    {   
+        //change color to selected
+        cells[i].style.backgroundColor = colorSelected;
+    } 
 }
 
 // Clear all cells
