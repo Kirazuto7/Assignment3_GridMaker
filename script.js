@@ -17,7 +17,7 @@ function addR() {
     {
         for(let i = 0; i < numCols - 1; i++)
         {
-            let newColumn = newRow.insertCell(-1);
+            let newColumn = newRow.insertCell(0);
         }
     }
     console.log("new row count:");
@@ -28,13 +28,24 @@ function addR() {
 function addC() {
     console.log("current col count:");
     console.log(numCols);
-    let allRows = document.querySelectorAll("tr");
 
-    for(let i = 0; i < numRows; i++)
+    // If no cell exists, create a row which also creates a column for the first time
+    if(numRows == 0)
     {
-        let newColumn = allRows[i].insertCell(0);
+        addR(); 
     }
-    numCols++;
+    else // Creates columns for all existing rows
+    {
+        let allRows = document.querySelectorAll("tr");
+
+        for(let i = 0; i < numRows; i++)
+        {
+            let newColumn = document.createElement("td");
+            allRows[i].appendChild(newColumn);
+        }
+
+        numCols++;
+    }
     
     console.log("new col count:");
     console.log(numCols);
@@ -74,6 +85,10 @@ function removeC() {
         numCols --; //decrement column count
         if(numCols === 0){ //if you just deleted the last column, reset the row count to 0
             numRows = 0;
+            allRows.forEach((row)=>
+                {
+                    row.remove();
+                });
         }
     }
     console.log("new col count:");
