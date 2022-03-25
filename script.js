@@ -4,30 +4,24 @@ let colorSelected;
 
 // Add a row
 function addR() {
-    console.log("current row count:");
-    console.log(numRows);
     let gridTableRef = document.getElementById("grid"); //reference to the table
     let newRow = gridTableRef.insertRow(-1); //Insert a row at the end of the table
-    let newCell = newRow.insertCell(0); //Insert a cell in the row at the index 0
+    newRow.insertCell(0); //Insert a cell in the row at the index 0
     numRows ++;
 
     if(numRows == 1) numCols++; // when adding a row for the first time, a column is also being added
 
-    if(numCols > 1)
+    if(numCols > 1) //Add a row to each column that exists
     {
         for(let i = 0; i < numCols - 1; i++)
         {
-            let newColumn = newRow.insertCell(0);
+            newRow.insertCell(0);
         }
     }
-    console.log("new row count:");
-    console.log(numRows);
 }
 
 // Add a column
 function addC() {
-    console.log("current col count:");
-    console.log(numCols);
 
     // If no cell exists, create a row which also creates a column for the first time
     if(numRows == 0)
@@ -36,25 +30,20 @@ function addC() {
     }
     else // Creates columns for all existing rows
     {
-        let allRows = document.querySelectorAll("tr");
+        let allRows = document.querySelectorAll("tr"); // Gets all of the rows
 
         for(let i = 0; i < numRows; i++)
         {
             let newColumn = document.createElement("td");
-            allRows[i].appendChild(newColumn);
+            allRows[i].appendChild(newColumn); // Inserts a column into each row
         }
 
         numCols++;
     }
-    
-    console.log("new col count:");
-    console.log(numCols);
 }
 
 // Remove a row
 function removeR() {
-    console.log("current row count:");
-    console.log(numRows);
     if(numRows === 0){
         alert("Please add a row"); //send alert when there are no rows to delete
     }
@@ -66,14 +55,10 @@ function removeR() {
             numCols = 0;
         }
     }
-    console.log("new row count:");
-    console.log(numRows);
 }
 
 // Remove a column
 function removeC() {
-    console.log("current col count:");
-    console.log(numCols);
     if(numCols === 0){
         alert("Please add a column"); //send alert when there are no columns to delete
     }
@@ -85,14 +70,13 @@ function removeC() {
         numCols --; //decrement column count
         if(numCols === 0){ //if you just deleted the last column, reset the row count to 0
             numRows = 0;
+            // Removes all rows that may exist after deleting the last column
             allRows.forEach((row)=>
                 {
                     row.remove();
                 });
         }
     }
-    console.log("new col count:");
-    console.log(numCols);
 }
 
 // Sets global variable for selected color
